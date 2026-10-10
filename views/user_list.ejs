@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+    <div class="petal" style="left:15%; animation-duration:9s; animation-delay:1s;"></div>
+    <div class="petal" style="left:35%; animation-duration:11s; animation-delay:3s;"></div>
+    <div class="petal" style="left:55%; animation-duration:8s; animation-delay:0s;"></div>
+    <div class="petal" style="left:75%; animation-duration:10s; animation-delay:2s;"></div>
+    <div class="petal" style="left:90%; animation-duration:12s; animation-delay:4s;"></div>
+
+    <div class="navbar">
+        <div class="brand">Cozy Boarding House</div>
+        <div class="nav-links">
+            <a href="/add_user">Add</a>
+            <a href="/user_list">Tenants</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Tenant List</h1>
+        <table border="0">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Action</th>
+            </tr>
+            <% sampledata.forEach(function(item) { %>
+            <tr>
+                <td><%= item.id %></td>
+                <td><%= item.fn %></td>
+                <td><%= item.ln %></td>
+                <td><%= item.address %></td>
+                <td><%= item.email %></td>
+                <td><%= item.cn %></td>
+                <td>
+                    <a href="/update_user/<%= item.id %>">Update</a>
+                    <a href="#" class="btn-delete" onclick="showConfirm(<%= item.id %>)">Delete</a>
+                </td>
+            </tr>
+            <% }); %>
+        </table>
+        <a href="/add_user">Add New Tenant</a>
+    </div>
+
+    <!-- DELETE CONFIRM MODAL -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-box">
+            <div class="modal-icon">&#9888;</div>
+            <h2>Are you sure?</h2>
+            <p>You want to delete this tenant?</p>
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="hideConfirm()">Cancel</button>
+                <button class="btn-confirm" onclick="confirmDelete()">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let deleteId = null;
+
+        function showConfirm(id) {
+            deleteId = id;
+            document.getElementById('deleteModal').classList.add('show');
+        }
+
+        function hideConfirm() {
+            document.getElementById('deleteModal').classList.remove('show');
+            deleteId = null;
+        }
+
+        function confirmDelete() {
+            if (deleteId) {
+                window.location.href = '/delete_user/' + deleteId;
+            }
+        }
+    </script>
+</body>
+</html>

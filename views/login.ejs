@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+    <div class="petal" style="left:10%; animation-duration:8s; animation-delay:0s;"></div>
+    <div class="petal" style="left:25%; animation-duration:10s; animation-delay:2s;"></div>
+    <div class="petal" style="left:45%; animation-duration:9s; animation-delay:4s;"></div>
+    <div class="petal" style="left:65%; animation-duration:11s; animation-delay:1s;"></div>
+    <div class="petal" style="left:80%; animation-duration:7s; animation-delay:3s;"></div>
+    <div class="petal" style="left:95%; animation-duration:12s; animation-delay:5s;"></div>
+
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-icon">&#127968;</div>
+            <h1>Welcome Back</h1>
+            <p class="login-sub">Sign in to continue to Cozy Boarding House</p>
+
+            <% if (typeof error !== 'undefined' && error) { %>
+                <div class="login-error"><%= error %></div>
+            <% } %>
+
+            <form action="/login" method="POST">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Enter your email" required>
+
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <p class="login-footer">Don't have an account? <a href="/add_user">Sign up</a></p>
+        </div>
+    </div>
+</body>
+</html>
